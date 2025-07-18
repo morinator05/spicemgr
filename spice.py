@@ -6,3 +6,6 @@ class Spice:
         self.name = init_name
         self.category = init_category
         self.in_stock = init_in_stock
+
+    def __str__(self):
+        return f"Spice(id={self.id}, name='{self.name}', category='{self.category}', in_stock={self.in_stock})"

@@ -84,3 +84,15 @@ class SpiceDB:
         if result is None:
             return None  # not found
         return Spice(result[0], result[1], result[2], bool(result[3]))
+
+    def search_by_str_in_name(self, name):
+        like_pattern = f"%{name}%"
+        self.cur.execute("SELECT * FROM spices WHERE name LIKE ?", (like_pattern,))
+        result = self.cur.fetchall()
+        spices = []
+        for db_element in result:
+            spices.append(Spice(db_element[0],
+                                db_element[1],
+                                db_element[2],
+                                bool(db_element[3])))
+        return spices
